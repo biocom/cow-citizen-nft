@@ -12,4 +12,4 @@ CITIZENS.map(({wallet, tokenID}) => {
   RECIPIENTS += `${tokenType},${tokenContract},${wallet},${quantity},${tokenID}\n`
 })
 
-fs.outputFileSync("./output.txt", RECIPIENTS);
+fs.outputFileSync("./output/NFT-CSV-AIRDROP.txt", RECIPIENTS);

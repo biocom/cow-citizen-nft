@@ -19,6 +19,7 @@
 /data/metadata/output
 /data/assets
 /data/node_modules
+/data/csv-airdrop/output
 
 # debug
 npm-debug.log*
