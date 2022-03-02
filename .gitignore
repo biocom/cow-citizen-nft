@@ -18,6 +18,7 @@
 /backup
 /data/metadata/output
 /data/assets
+/data/node_modules
 
 # debug
 npm-debug.log*
