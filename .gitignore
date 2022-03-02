@@ -17,7 +17,7 @@
 .DS_Store
 /backup
 /data/metadata/output
-/data/metadata/assets
+/data/assets
 
 # debug
 npm-debug.log*

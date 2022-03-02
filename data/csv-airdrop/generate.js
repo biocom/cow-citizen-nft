@@ -1,13 +1,15 @@
 import fs from 'fs-extra'
-import { Citizens } from './citizens.js'
+
+const CITIZENS = fs.readJsonSync('../src/citizens.json')
+const tokenType = 'ERC721'
+const tokenContract = '0x00000000000000000000000000'
+const quantity = '1'
+
 
 let RECIPIENTS = ""
 
-Citizens.map(({wallet, tokenID}) => {
-  // RECIPIENTS += `_safeMint(${wallet}, 1);\n`
-  // RECIPIENTS += `${wallet},''\n`
-  // RECIPIENTS += `${wallet}\n`
-  RECIPIENTS += `ERC721,0x015780415e2FFdB7480D82e1ac8BD03EDDCec607,${wallet},1,${tokenID}\n`
+CITIZENS.map(({wallet, tokenID}) => {
+  RECIPIENTS += `${tokenType},${tokenContract},${wallet},${quantity},${tokenID}\n`
 })
 
 fs.outputFileSync("./output.txt", RECIPIENTS);

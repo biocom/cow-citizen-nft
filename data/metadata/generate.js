@@ -1,6 +1,6 @@
 import fs from 'fs-extra'
 
-const nftJSON = fs.readJsonSync('./src/nfts.json')
+const nftJSON = fs.readJsonSync('../src/nfts.json')
 const nftExternalURL = 'https://cow.fi/'
 const nftBaseURI = 'https://IPFS-URL.TBD/'
 const nftImageBaseURI = `${nftBaseURI}image/`
