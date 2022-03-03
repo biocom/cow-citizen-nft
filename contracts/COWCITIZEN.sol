@@ -43,11 +43,10 @@
 pragma solidity ^0.8.4;
 
 import "erc721a/contracts/ERC721A.sol";
-import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
-contract CowCitizen is ERC721A, Pausable, Ownable {
+contract CowCitizen is ERC721A, Ownable {
     constructor() ERC721A("CoW Citizen", "CITIZEN") {}
 
     /**
@@ -66,7 +65,7 @@ contract CowCitizen is ERC721A, Pausable, Ownable {
         if (!_exists(tokenId)) revert URIQueryForNonexistentToken();
 
         string memory baseURI = _baseURI();
-        return bytes(baseURI).length != 0 ? string(abi.encodePacked(baseURI, Strings.toString(tokenId), "/metadata.json")) : '';
+        return string(abi.encodePacked(baseURI, Strings.toString(tokenId), "/metadata.json"));
     }
 
     // Mint quantity to contract owner
