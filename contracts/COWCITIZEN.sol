@@ -48,7 +48,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
 contract CowCitizen is ERC721A, Pausable, Ownable {
-    constructor() ERC721A("CWTEST", "TT") {}
+    constructor() ERC721A("CoW Citizen", "CITIZEN") {}
 
     /**
     * @dev Base URI for computing {tokenURI}. If set, the resulting URI for each
