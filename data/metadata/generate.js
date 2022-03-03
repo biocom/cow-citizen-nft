@@ -2,8 +2,7 @@ import fs from 'fs-extra'
 
 const nftJSON = fs.readJsonSync('../src/nfts.json')
 const nftExternalURL = 'https://cow.fi/'
-const nftBaseURI = 'https://IPFS-URL.TBD/'
-const nftImageBaseURI = `${nftBaseURI}image/`
+const nftImageBaseURI = 'https://cloudflare-ipfs.com/ipfs/QmZZHeQVcguGx2GM5DFcTSq9AcGfacmjUoKBPN16kdnNam/'
 
 function sanitizeFileName (name) {
   // Remove white spaces + uppercase
@@ -11,11 +10,11 @@ function sanitizeFileName (name) {
 } 
 
 async function generateNFTS() {
-  const totalCitizens = nftJSON.length
+  const totalNFTS = nftJSON.length
 
   console.log(`
       ======= Generating CoW Citizen NFT's ========
-      Total unique CoW Citizens: ${totalCitizens}
+      Total unique NFTs: ${totalNFTS}
     `)
 
   // Make sure the /output/ folder is empty to start
@@ -31,7 +30,7 @@ async function generateNFTS() {
     const JSONFile = {
       id: id,
       description: `CoW Citizen - Early investor in the CoW Protocol with ${investmentToken} on ${investmentNetwork}`,
-      external_url: nftExternalURL,
+      external_url: `${nftExternalURL}?cowCitizen=${id}`,
       image: `${nftImageBaseURI}${sanitizeFileName(investmentToken)}-${sanitizeFileName(investmentNetwork)}.gif`,
       name: "CoW Citizen - Early Investor",
       attributes: [
@@ -51,13 +50,17 @@ async function generateNFTS() {
     }
 
     // Output JSON file
-    const outputPath = `./output/${id}/${id}.json`
+    const outputPath = `./output/${id}/metadata.json`
     console.log(`Writing file ${outputPath} - CoW Citizen: ${citizenID} | ${investmentToken} | ${investmentNetwork}`)
     fs.outputJsonSync(outputPath, JSONFile);
   })
 
+  // Copy static image assets to the /output/images/ folder
+  // fs.copySync('../assets', './output/images')
+  // console.log(`Successfully copied image assets to /output/images/`)
+
   // Finished
-  console.log(`Finished generating ${totalCitizens} folders to /output/`)
+  console.log(`Finished generating ${totalNFTS} folders to /output/`)
 }
 
 generateNFTS()
