@@ -14,9 +14,6 @@ links.map(async link => {
     .then((response) => response.json().then((res) => {
       console.log(`ID: ${res.id} - Header: ${response.status}`)
     }))
-    .then((apiResponse) => {
-      console.log(apiResponse)
-    })
     .catch((error) => {
       console.error('Error:', error);
     });
