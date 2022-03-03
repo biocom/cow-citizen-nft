@@ -1,4 +1,3 @@
-pragma solidity ^0.8.4;
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 // ░░░░░░░░░░░░░░░░▒▒▓▓▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▓▓▒▒░░░░░░░░░░░░░░░░
@@ -41,12 +40,24 @@ pragma solidity ^0.8.4;
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▓█▓▒░░░░░▓█▓▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▓█▓▓█▓▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
+pragma solidity ^0.8.4;
+
 import "erc721a/contracts/ERC721A.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
 
 contract CowCitizen is ERC721A, Pausable, Ownable {
-    constructor() ERC721A("Cow Citizen", "CIT") {}
+    constructor() ERC721A("CWTEST", "TT") {}
+
+    /**
+    * @dev Base URI for computing {tokenURI}. If set, the resulting URI for each
+    * token will be the concatenation of the `baseURI` and the `tokenId`. Empty
+    * by default, can be overriden in child contracts.
+    */
+    function _baseURI() internal view virtual override returns (string memory) {
+        return 'https://cloudflare-ipfs.com/ipfs/QmWhopatpPGv6N7ytKCTirzbp9UWgpfSemXbwdAymuqPqm/';
+    }
 
     /**
      * @dev See {IERC721Metadata-tokenURI}.
@@ -55,16 +66,7 @@ contract CowCitizen is ERC721A, Pausable, Ownable {
         if (!_exists(tokenId)) revert URIQueryForNonexistentToken();
 
         string memory baseURI = _baseURI();
-        return bytes(baseURI).length != 0 ? string(abi.encodePacked(baseURI, tokenId.toString(), "/metadata.json")) : '';
-    }
-
-    /**
-    * @dev Base URI for computing {tokenURI}. If set, the resulting URI for each
-    * token will be the concatenation of the `baseURI` and the `tokenId`. Empty
-    * by default, can be overriden in child contracts.
-    */
-    function _baseURI() internal view virtual override returns (string memory) {
-        return 'https://cloudflare-ipfs.com/ipfs/QmUNLLsPACCz1vLxQVkXqqLX5R1X345qqfHbsf67hvA3Nn/';
+        return bytes(baseURI).length != 0 ? string(abi.encodePacked(baseURI, Strings.toString(tokenId), "/metadata.json")) : '';
     }
 
     // Mint quantity to contract owner
