@@ -2,7 +2,7 @@ import fs from 'fs-extra'
 
 const CITIZENS = fs.readJsonSync('../src/mainnet-gc-EOA-citizens.json')
 const tokenType = 'ERC721'
-const tokenContract = '0x00000000000000000000000000'
+const tokenContract = '0x62108E1AC36a163A68B869d096cb14CE690ca30b' // CITIZEN on Gnosis Chain
 const quantity = '1'
 let RECIPIENTS = ""
 
